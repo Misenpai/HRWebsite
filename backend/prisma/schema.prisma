@@ -1,0 +1,24 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model HR {
+  username String @id
+  password String
+
+  @@map("hR")
+}
+
+model HRPIRelation {
+  id         Int    @id @default(autoincrement())
+  username   String // HR username
+  piUsername String
+
+  @@unique([username, piUsername])
+  @@map("hRPIRelation")
+}
